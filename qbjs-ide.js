@@ -143,21 +143,13 @@ defaultSourcePath = srcUrl;
             var sconsolePersistent = localStorage.getItem(
               "@@_consolePersistent"
             );
-            if (sconsolePersistent && sconsolePersistent != "") {
-              if (sconsolePersistent == "true") {
-                consolePersistent = true;
-                var sconsoleVisible = localStorage.getItem("@@_consoleVisible");
-                if (sconsoleVisible && sconsoleVisible != "") {
-                  consoleVisible = sconsoleVisible !== "true";
-                  _showConsole();
-                }
-                var scurrTab = localStorage.getItem("@@_currTab");
-                if (scurrTab && scurrTab != "") {
-                  if (scurrTab == "js") currTab = "console";
-                  _changeTab(scurrTab);
-                }
-              }
-            }
+  if (sconsolePersistent && sconsolePersistent != "") {
+  if (sconsolePersistent == "true") {
+    consolePersistent = true;
+    consoleVisible = true;
+    _changeTab("console");
+  }
+}
             _e.ideTheme.href = "codemirror/themes/" + theme + ".css";
             GitHelp.navhome();
         }
@@ -268,7 +260,7 @@ if (srcUrl) {
         }
 
         var warnCount = 0;
-        
+        _changeTab("console");
         window.onresize();
 
         if (appMode == "auto") {
@@ -923,42 +915,17 @@ async function _reloadSource() {
         window.dispatchEvent(new Event('resize'));
     }
 
-    function _changeTab(tabName) {
-if (tabName !== "console") return;
-        if (tabName == currTab) { return; }
-        _el("tab-" + currTab).classList.remove("active");
-        _el("tab-" + tabName).classList.add("active");
-        currTab = tabName;
-        localStorage.setItem("@@_currTab", currTab);
+function _changeTab(tabName) {
+    if (tabName !== "console") return;
 
-        if (currTab == "console") {
-            _e.warningContainer.style.display = "block";
-            _e.jsCode.style.display = "none";
-            _e.fsBrowser.style.display = "none";
-            _e.help.style.display = "none";
-        }
-        else if (currTab == "js") {
-            _e.warningContainer.style.display = "none";
-            _e.fsBrowser.style.display = "none";
-            _e.jsCode.style.display = "block";
-            _e.help.style.display = "none";
-            window.onresize();
-            if (jscm) { jscm.refresh() };
-        }
-        else if (currTab == "fs") {
-            _e.fsBrowser.style.display = "block";
-            _e.warningContainer.style.display = "none";
-            _e.jsCode.style.display = "none";
-            _e.help.style.display = "none";
-            _refreshFS();
-        }
-        else if (currTab == "help") { 
-            _e.warningContainer.style.display = "none";
-            _e.jsCode.style.display = "none";
-            _e.fsBrowser.style.display = "none";
-            _e.help.style.display = "block";
-        }
-    }
+    currTab = "console";
+    _el("tab-console").classList.add("active");
+
+    _e.warningContainer.style.display = "block";
+    _e.jsCode.style.display = "none";
+    _e.fsBrowser.style.display = "none";
+    _e.help.style.display = "none";
+}
 
     function _changeMethodTab(tabName) {
         if (tabName == currMethodTab) { return; }
