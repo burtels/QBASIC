@@ -60,7 +60,7 @@ a:after { content: " >"; }
 #output-container {
     position: absolute;
     color: #ccc;
-    display: none;
+    display: block;
 }
 #output-content {
     border: 1px solid #666;
