@@ -400,9 +400,6 @@ if (srcUrl) {
     async function _runProgram() {
         _e.loadScreen.style.display = "none";
 
-        if (sizeMode == "max") {
-            _slideLeft();
-        }
         GX.reset();
         QB.start();
 
