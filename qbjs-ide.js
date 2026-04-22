@@ -7,8 +7,8 @@ var IDE = new function() {
     var url = location.href;
     var sizeMode = "normal";
     var appMode = "ide";
-    var consoleVisible = false;
-    var currTab = "js";
+    var consoleVisible = true;
+    var currTab = "console";
     var consolePersistent = false;
     var currMethodTab = "methods";
     var editor;
@@ -268,7 +268,7 @@ if (srcUrl) {
         }
 
         var warnCount = 0;
-        if (!consolePersistent) _changeTab("console");
+        
         window.onresize();
 
         if (appMode == "auto") {
